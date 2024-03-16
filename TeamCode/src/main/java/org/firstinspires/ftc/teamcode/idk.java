@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -11,9 +12,11 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-
+@Config
 @TeleOp(name = "Robot_arm_test_bucket (Blocks to Java)")
 public class idk extends LinearOpMode {
+    FtcDashboard dashboard;
+
 
     private DcMotor arm;
     private DcMotor front_right_port_2;
@@ -23,15 +26,18 @@ public class idk extends LinearOpMode {
     private Servo launcher;
     private Servo bucket;
     private DcMotor front_left_port_0;
+
+    public static double test = 7;
     private DcMotor back_left_port_3;
+    public static double drivemode = 1;
 
     /**
      * This function is executed when this OpMode is selected from the Driver Station.
      */
+
     @Override
     public void runOpMode() {
-
-        FtcDashboard dashboard = FtcDashboard.getInstance();
+        dashboard = FtcDashboard.getInstance();
         Telemetry dashboardTelemetry = dashboard.getTelemetry();
         arm = hardwareMap.get(DcMotor.class, "arm");
         front_right_port_2 = hardwareMap.get(DcMotor.class, "front_right_port_2");
@@ -118,19 +124,17 @@ public class idk extends LinearOpMode {
      * Describe this function...
      */
     private void holonomic(float vertica, float horizonta, float pivo) {
-        double drivemode = 1;
         double Vertical;
         double Horizontal;
         double Pivot;
-
-        if (gamepad1.x) {
-            drivemode = 0.35;
+        if (gamepad1.a){
+            drivemode = 1;
         }
-        if (gamepad1.b) {
-            drivemode = 0.6;
+        if (gamepad1.b){
+            drivemode = 0.7;
         }
-        if (gamepad1.a) {
-            drivemode = 0.85;
+        if (gamepad1.x){
+            drivemode = 0.4;
         }
         Vertical = vertica * drivemode;
         Horizontal = -(horizonta * drivemode);
